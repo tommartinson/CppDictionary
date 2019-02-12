@@ -9,7 +9,7 @@ class Dictionary{
   vector< pair <string,int> > dict;   //vector to store pairs
     
   void keys(){//prints list of keys
-    cout << "Keys: [";
+    cout << "[";
     for(int i = 0;i<dict.size()-1;i++){
       cout << dict[i].first << ", "; 
     }
@@ -17,7 +17,7 @@ class Dictionary{
 	}    
 
   void values(){//prints list of values
-    cout << "Values: [";
+    cout << "[";
     for(int i = 0;i<dict.size()-1;i++){
       cout << dict[i].second << ", "; 
     }
@@ -26,7 +26,7 @@ class Dictionary{
 	}  
 
   void items(){//prints list of key/value pairs
-    cout << "Items: [";
+    cout << "[";
     for(int i = 0;i<dict.size()-1;i++){
       cout << "(" << dict[i].first << "," << dict[i].second << "),"; 
     }
@@ -37,21 +37,16 @@ class Dictionary{
   void add(string key, int value){//adds a pair to the dictionary
 	  if(in(key)==0){
       dict.push_back( make_pair(key,value) );
-    }else{
-      cout << "Failed to add item: ("<<key<<","<<value <<") key already exists." << endl;
     }
-    
 	}     
 
 	void del(string key){//removes the pair corresponding to the string
-		 for(int i = 0;i<dict.size();i++){
+		for(int i = 0;i<dict.size();i++){
       if(dict[i].first == key){
-        //dict.erase(i); 
+        dict.erase (dict.begin()+i); 
       } 
     }
-      
-    
-	}     
+  }     
 
   bool in(string key){//outputs true(1) if the key is in the dictionary, false(0) if not
     bool ret = false;
@@ -89,7 +84,6 @@ class Dictionary{
     }
     
     return newDict;
-
   }
        
 };
@@ -120,6 +114,11 @@ int main(){
   d2.items();
 
   Dictionary d3 = d+(d2);
+  d3.items();
+  
+  cout << "Let's try deleting some items." << endl;
+  d3.del("tom");
+  d3.del("dad");
   d3.items();
     
   return 0;
