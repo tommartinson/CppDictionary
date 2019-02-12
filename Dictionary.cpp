@@ -35,7 +35,12 @@ class Dictionary{
   }  
 
   void add(string key, int value){//adds a pair to the dictionary
-	  dict.push_back( make_pair(key,value) );
+	  if(in(key)==0){
+      dict.push_back( make_pair(key,value) );
+    }else{
+      cout << "Failed to add item: ("<<key<<","<<value <<") key already exists." << endl;
+    }
+    
 	}     
 
 	void del(string key){//removes the pair corresponding to the string
@@ -48,10 +53,6 @@ class Dictionary{
     
 	}     
 
-  int size(){ //returns number of pairs in dictionary
-    return static_cast<int>(dict.size());
-  }
-
   bool in(string key){//outputs true(1) if the key is in the dictionary, false(0) if not
     bool ret = false;
     for(int i = 0;i<dict.size();i++){
@@ -62,11 +63,32 @@ class Dictionary{
     return ret;
   }      
 
-  int get(string key){ //returns value corresponding to the key
-    return 0;
+  int get(string key){ //returns value corresponding to the key, -1 if it doesn't exist
+    int val = -1;
+    for(int i = 0;i<dict.size();i++){
+      if(dict[i].first==key){
+        val = dict[i].second;
+      }
+    }
+    return val;
   }     
 
-  void operator +(){//overloading + operator for two dictionaries
+  Dictionary operator +(Dictionary other){//overloading + operator for two dictionaries
+    Dictionary newDict;
+      
+    for(int i = 0;i<dict.size();i++){
+      string tempKey = dict[i].first;
+      int tempVal = dict[i].second;
+      newDict.add(tempKey,tempVal);
+    }
+
+    for(int j = 0;j<other.dict.size();j++){
+      string tempKey = other.dict[j].first;
+      int tempVal = other.dict[j].second;
+      newDict.add(tempKey,tempVal);
+    }
+    
+    return newDict;
 
   }
        
@@ -74,15 +96,31 @@ class Dictionary{
 
 int main(){
     
-    Dictionary d;
-    d.add("tom",22);
-    d.add("joe",18);
-    d.add("ciera",23);
-    d.add("mitch",21);
-    d.add("nathan",21);
-    d.keys();
-    d.values();
-    d.items();
-    cout << d.in("mitch");
-    return 0;
+  Dictionary d;
+  d.add("tom",22);
+  d.add("joe",18);
+  d.add("ciera",23);
+  //d.add("mitch",21);
+  d.add("mitch",25);
+  d.add("nathan",21);
+  //d.keys();
+  //d.values();
+  d.items();
+  //cout << d.in("mitch") << endl;
+  //cout << d.get("tom")<< endl;
+  //cout << d.get("nathan")<< endl;
+  //cout << d.get("poop")<< endl;
+
+  Dictionary d2;
+  d2.add("tom",22);
+  d2.add("mom",57);
+  d2.add("ciera",23);
+  d2.add("dad",58);
+  d2.add("nathan",21);
+  d2.items();
+
+  Dictionary d3 = d+(d2);
+  d3.items();
+    
+  return 0;
 }
