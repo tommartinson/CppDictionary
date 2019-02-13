@@ -4,6 +4,13 @@
 #include <bits/stdc++.h> 
 using namespace std;
 
+//Thomas Martinson
+//818755425
+//CS520
+/*This program replicates Python's Dictionary class and
+it's main functions.*/
+
+
 class Dictionary{
   public:
   vector< pair <string,int> > dict;   //vector to store pairs
@@ -125,6 +132,7 @@ int main(){
 
   cout <<endl << "Let's test if there is a key in the dictionary. 1 means yes, 0 means no." << endl;
   cout << d.in("mitch") << endl;
+  cout << d.in("marge") << endl;
 
   cout << endl << "Let's see what value matches a certain key. -1 means the key doesn't exist." << endl;
   cout << "The value is: " << d.get("tom")<< endl;
@@ -139,20 +147,17 @@ int main(){
   d2.add("randy",27);
   d2.add("dad",58);
   d2.add("nathan",21);
-  
   d2.items();
 
-  
-  
   cout <<endl<< "Let's try deleting an item." << endl;
   d2.del("fred");
   d2.items();
 
-  //Dictionary d3 = d+(d2);
-  //d3.items();
-  //d3.del("dad");
-  //d3.items();
-
+  cout << endl <<"Now let's test the + operator by doing a union operation on the two dictionaries we created." << endl;
+  Dictionary d3 = d+(d2);
+  d3.items();
+  
+  cout << endl <<"Let's create an empty dictionary and look at it's contents." << endl;
   Dictionary d4;
   d4.items();
   d4.keys();
