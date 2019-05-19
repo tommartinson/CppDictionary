@@ -5,8 +5,6 @@
 using namespace std;
 
 //Thomas Martinson
-//818755425
-//CS520
 /*This program replicates Python's Dictionary class and
 it's main functions.*/
 
